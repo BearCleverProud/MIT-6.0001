@@ -126,9 +126,11 @@ def hangman(secret_word):
 
     Follows the other limitations detailed in the problem write-up.
     '''
+    total_guesses=6
+    word_length=4
     print("Welcome to the game hangman")
-    print("I am thinking of a word that is 4 letters long")
-    print("You have 6 guesses left")
+    print("I am thinking of a word that is "+str(word_length)+" letters long")
+    print("You have "+str(total_guesses)+" guesses left")
     print("Available letters:"+str(get_available_letters("")))
     # FILL IN YOUR CODE HERE AND DELETE "pass"
     pass
