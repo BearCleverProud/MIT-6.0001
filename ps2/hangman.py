@@ -92,8 +92,11 @@ def get_available_letters(letters_guessed):
     returns: string (of letters), comprised of letters that represents which letters have not
       yet been guessed.
     '''
+    result=""
+    for letter not in string.ascii_lowercase:
+        result.append(letter)
     # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
+    return result
 
 
 
