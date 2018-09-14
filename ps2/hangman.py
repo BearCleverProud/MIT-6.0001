@@ -93,8 +93,9 @@ def get_available_letters(letters_guessed):
       yet been guessed.
     '''
     result=""
-    for letter not in string.ascii_lowercase:
-        result.append(letter)
+    for letter in string.ascii_lowercase:
+        if letter not in letters_guessed:
+            result+=letter
     # FILL IN YOUR CODE HERE AND DELETE "pass"
     return result
 
@@ -125,6 +126,10 @@ def hangman(secret_word):
 
     Follows the other limitations detailed in the problem write-up.
     '''
+    print("Welcome to the game hangman")
+    print("I am thinking of a word that is 4 letters long")
+    print("You have 6 guesses left")
+    print("Available letters:"+str(get_available_letters("")))
     # FILL IN YOUR CODE HERE AND DELETE "pass"
     pass
 
