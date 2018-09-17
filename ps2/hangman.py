@@ -204,6 +204,8 @@ def match_with_gaps(my_word, other_word):
         _ , and my_word and other_word are of the same length;
         False otherwise:
     '''
+    my_word=''.join(my_word.split())
+    
     # FILL IN YOUR CODE HERE AND DELETE "pass"
     pass
 
