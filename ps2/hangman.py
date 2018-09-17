@@ -126,10 +126,10 @@ def hangman(secret_word):
 
     Follows the other limitations detailed in the problem write-up.
     '''
-    score=0
+
     total_guesses=6
     total_warning=3
-    word_length=4
+    word_length=len(secret_word)
     letters_guessed=[]
     wrong_letter=[]
     print("Welcome to the game Hangman!")
@@ -177,11 +177,11 @@ def hangman(secret_word):
         print("-------------")
     if is_word_guessed(secret_word,letters_guessed):
         print("Congratulations, you won!")
-        print("Your total score for this game is: "+str(score))
+        final_score=total_guesses
+        print("Your total score for this game is: "+str(final_score))
     else:
         print("Sorry, you ran out of guesses. The word was "+secret_word+".")
     # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
 
 
 
@@ -268,8 +268,7 @@ if __name__ == "__main__":
     # To test part 2, comment out the pass line above and
     # uncomment the following two lines.
 
-    #secret_word = choose_word(wordlist)
-    secret_word="else"
+    secret_word = choose_word(wordlist)
     hangman(secret_word)
 
 ###############
