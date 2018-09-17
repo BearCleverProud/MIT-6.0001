@@ -205,9 +205,25 @@ def match_with_gaps(my_word, other_word):
         False otherwise:
     '''
     my_word=''.join(my_word.split())
-    
+    if len(my_word)!=len(other_word):
+        return False
+    else:
+        letter_index=[]
+        i=0
+        while i<len(my_word):
+            if my_word[i]!='_':
+                letter_index.append(i)
+                if my_word[i]!=other_word[i]:
+                    return False
+        i=0
+        while i<len(my_word):
+            if my_word[i]=='_':
+                for index in letter_index:
+                    if other_word[i]==other_word[letter_index]:
+                        return False
+    return True
+
     # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
 
 
 
