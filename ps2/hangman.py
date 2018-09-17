@@ -235,8 +235,15 @@ def show_possible_matches(my_word):
              at which that letter occurs in the secret word are revealed.
              Therefore, the hidden letter(_ ) cannot be one of the letters in the word
              that has already been revealed.
-
     '''
+    answers=[]
+    for each_word in wordlist:
+        if match_with_gaps(my_word,each_word):
+            answers.append(my_word)
+    if len(answers)!=0:
+        print(answers)
+    else:
+        print("No matches found")
     # FILL IN YOUR CODE HERE AND DELETE "pass"
     pass
 
