@@ -243,7 +243,9 @@ def show_possible_matches(my_word):
         if match_with_gaps(my_word,each_word):
             answers+=each_word+" "
     if len(answers)!=0:
+        print("Possible word matches are:")
         print(answers)
+        print("-------------")
     else:
         print("No matches found")
     # FILL IN YOUR CODE HERE AND DELETE "pass"
