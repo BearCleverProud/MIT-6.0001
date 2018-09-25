@@ -175,8 +175,17 @@ def update_hand(hand, word):
     hand: dictionary (string -> int)
     returns: dictionary (string -> int)
     """
+    new_hand=hand.copy()
 
-    pass  # TO DO... Remove this line when you implement this function
+    for each_element in hand.keys():
+        new_hand[each_element.lower()]=hand[each_element]
+    for each_letter in word.lower():
+        if each_letter in new_hand.keys():
+            new_hand[each_letter]-=1
+    for each_element in new_hand.keys():
+        if new_hand[each_element]<0:
+            new_hand[each_element]=0
+    return new_hand
 
 #
 # Problem #3: Test word validity
