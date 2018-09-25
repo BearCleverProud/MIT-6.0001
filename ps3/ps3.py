@@ -201,8 +201,18 @@ def is_valid_word(word, hand, word_list):
     word_list: list of lowercase strings
     returns: boolean
     """
-
-    pass  # TO DO... Remove this line when you implement this function
+    word_lower=word.lower()
+    handCopy=hand.copy()
+    if word_lower not in word_list:
+        return False
+    else:
+        for each_letter in word_lower:
+            if each_letter not in handCopy.keys():
+                return False
+            elif handCopy[each_letter]==0:
+                return False
+            handCopy[each_letter]-=1
+    return True
 
 #
 # Problem #5: Playing a hand
