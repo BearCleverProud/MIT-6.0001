@@ -117,7 +117,6 @@ def display_hand(hand):
 
     hand: dictionary (string -> int)
     """
-
     for letter in hand.keys():
         for j in range(hand[letter]):
              print(letter, end=' ')      # print all on the same line
@@ -228,8 +227,7 @@ def calculate_handlen(hand):
     hand: dictionary (string-> int)
     returns: integer
     """
-
-    pass  # TO DO... Remove this line when you implement this function
+    return len(hand.keys())
 
 def play_hand(hand, word_list):
 
@@ -261,10 +259,25 @@ def play_hand(hand, word_list):
       returns: the total score for the hand
 
     """
-
+    total_score=0
     # BEGIN PSEUDOCODE <-- Remove this comment when you implement this function
     # Keep track of the total score
+    while calculate_handlen(hand)!=0:
+        print("Current Hand: ", end=' ')
+        display_hand(hand)
+        input_string=input("Enter word, or '"!!"' to indicate that you are finished: ")
+        if input_string=="!!":
+            break
+        else:
+            if is_valid_word(input_string,hand,word_list):
+                total_score+=get_word_score(input_string,calculate_handlen(hand))
+                print(input_string+" earned "+get_word_score(input_string,calculate_handlen(hand))+". Total: "+total_score)
+            else:
+                print("That is not a valid word. Please choose another word.")
 
+            update_hand(hand,input_string)
+    print("Total: "+total_score)
+    return total_score
     # As long as there are still letters left in the hand:
 
         # Display the hand
