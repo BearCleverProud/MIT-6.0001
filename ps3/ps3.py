@@ -271,11 +271,12 @@ def play_hand(hand, word_list):
         else:
             if is_valid_word(input_string,hand,word_list):
                 total_score+=get_word_score(input_string,calculate_handlen(hand))
-                print(input_string+" earned "+get_word_score(input_string,calculate_handlen(hand))+". Total: "+total_score)
+                print('"'+input_string+'"'+" earned "+get_word_score(input_string,calculate_handlen(hand))+". Total: "+total_score)
             else:
                 print("That is not a valid word. Please choose another word.")
 
             update_hand(hand,input_string)
+    print("Run out of letters.")
     print("Total: "+total_score)
     return total_score
     # As long as there are still letters left in the hand:
