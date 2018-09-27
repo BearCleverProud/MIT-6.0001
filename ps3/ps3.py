@@ -341,8 +341,15 @@ def substitute_hand(hand, letter):
     letter: string
     returns: dictionary (string -> int)
     """
+    handCopy=hand.copy()
+    numberOfCards=handCopy[letter]
+    handCopy[letter]=0
+    new_letter=random.choice(VOWELS+CONSONANTS)
+    while new_letter==letter:
+        new_letter=random.choice(VOWELS+CONSONANTS)
+    handCopy[new_letter]=numberOfCards
 
-    pass  # TO DO... Remove this line when you implement this function
+    return handCopy
 
 
 def play_game(word_list):
