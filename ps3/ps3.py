@@ -16,7 +16,7 @@ CONSONANTS = 'bcdfghjklmnpqrstvwxyz'
 HAND_SIZE = 7
 
 SCRABBLE_LETTER_VALUES = {
-    'a': 1, 'b': 3, 'c': 3, 'd': 2, 'e': 1, 'f': 4, 'g': 2, 'h': 4, 'i': 1, 'j': 8, 'k': 5, 'l': 1, 'm': 3, 'n': 1, 'o': 1, 'p': 3, 'q': 10, 'r': 1, 's': 1, 't': 1, 'u': 1, 'v': 4, 'w': 4, 'x': 8, 'y': 4, 'z': 10
+    'a': 1, 'b': 3, 'c': 3, 'd': 2, 'e': 1, 'f': 4, 'g': 2, 'h': 4, 'i': 1, 'j': 8, 'k': 5, 'l': 1, 'm': 3, 'n': 1, 'o': 1, 'p': 3, 'q': 10, 'r': 1, 's': 1, 't': 1, 'u': 1, 'v': 4, 'w': 4, 'x': 8, 'y': 4, 'z': 10,'*': 0
 }
 
 # -----------------------------------
@@ -148,6 +148,10 @@ def deal_hand(n):
         x = random.choice(VOWELS)
         hand[x] = hand.get(x, 0) + 1
 
+    replaced_vowel=random.choice(hand.keys())
+    hand[replaced_vowel]=hand.get(replaced_vowel,0)-1
+    hand["*"]=1
+
     for i in range(num_vowels, n):
         x = random.choice(CONSONANTS)
         hand[x] = hand.get(x, 0) + 1
@@ -203,7 +207,7 @@ def is_valid_word(word, hand, word_list):
     """
     word_lower=word.lower()
     handCopy=hand.copy()
-    if word_lower not in word_list:
+    if word_lower.replace('*','a') not in word_list and word_lower.replace('*','e') not in word_list and word_lower.replace('*','i') not in word_list and word_lower.replace('*','o') not in word_list and word_lower.replace('*','u') not in word_list:
         return False
     else:
         for each_letter in word_lower:
