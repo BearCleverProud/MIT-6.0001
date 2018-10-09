@@ -27,22 +27,17 @@ def get_permutations(sequence):
     if length==1:
         return sequence
     else:
-        result.append(sequence)
         sequence_list=list(sequence)
-        temp=(sequence_list[0]+x for x in get_permutations(''.join(sequence_list[1:])))
-        result.extend(temp)
-        for i in range(1,length):
+        for i in range(length):
             sequence_list[i],sequence_list[0]=sequence_list[0],sequence_list[i]
-            result.append(''.join(sequence_list))
-            temp=(sequence_list[0]+x for x in get_permutations(''.join(sequence_list[1:])))
+            temp=[sequence_list[0]+x for x in get_permutations(''.join(sequence_list[1:]))]
             result.extend(temp)
             sequence_list[i],sequence_list[0]=sequence_list[0],sequence_list[i]
-        result=list(set(result))
         return result
 
 if __name__ == '__main__':
     #EXAMPLE
-    example_input = 'abcd'
+    example_input = 'abcdefgh'
     print('Input:', example_input)
     print('Expected Output:', ['abc', 'acb', 'bac', 'bca', 'cab', 'cba'])
     print('Actual Output:', get_permutations(example_input))
