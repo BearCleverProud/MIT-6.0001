@@ -250,30 +250,29 @@ def read_trigger_config(filename):
     triggers=[]
     trigger_dict={}
     for each_line in lines:
-        line_split=line.split(",")
+        line_split=each_line.split(",")
         if line_split[0]=="ADD":
             for i in range(1,len(line_split)):
                 triggers.append(trigger_dict[line_split[i]])
         else:
             trigger_name=line_split[0]
-            if line[1]=="TITLE":
+            if line_split[1]=="TITLE":
                 trigger_dict[trigger_name]=TitleTrigger(line_split[2])
-            elif line[1]=="DESCRIPTION":
+                print(trigger_dict)
+            elif line_split[1]=="DESCRIPTION":
                 trigger_dict[trigger_name]=DescriptionTrigger(line_split[2])
-            elif line[1]=="AND":
+            elif line_split[1]=="AND":
                 trigger_dict[trigger_name]=AndTrigger(trigger_dict[line_split[2]],trigger_dict[line_split[3]])
-            elif line[1]=="NOT":
+            elif line_split[1]=="NOT":
                 trigger_dict[trigger_name]=NotTrigger(trigger_dict[line_split[2]])
-            elif line[1]=="OR":
+            elif line_split[1]=="OR":
                 trigger_dict[trigger_name]=OrTrigger(trigger_dict[line_split[2]],trigger_dict[line_split[3]])
-            elif line[1]=="AFTER":
+            elif line_split[1]=="AFTER":
                 trigger_dict[trigger_name]=AfterTrigger(line_split[2])
-            elif line[1]=="BEFORE":
+            elif line_split[1]=="BEFORE":
                 trigger_dict[trigger_name]=BeforeTrigger(line_split[2])
             else:
                 pass
-
-    print(lines) # for now, print it so you see what it contains!
     return triggers
 
 
