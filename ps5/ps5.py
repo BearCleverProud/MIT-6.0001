@@ -94,14 +94,50 @@ class Trigger(object):
 # PHRASE TRIGGERS
 
 # Problem 2
-# TODO: PhraseTrigger
+# PhraseTrigger
+class PharseTrigger(Trigger):
+    def __init__(self,pharse):
+        self.pharse=pharse.lower()
 
+    def get_pharse(self):
+        return self.pharse
+
+    def is_pharse_in(self,text):
+        text=text.lower()
+        text_space=""
+        text_split=[]
+        for each in text:
+            if each not in string.ascii_letters:
+                text_space+=" "
+            else:
+                text_space+=each
+        text_split=text_space.split(" ")
+        while '' in text_split:
+            text_split.remove('')
+        text_length=len(text_split)
+        pharse_list=self.get_pharse().split(" ")
+        pharse_length=len(pharse_list)
+        for i in range(text_length-pharse_length+1):
+            match_times=0
+            for j in range(pharse_length):
+                if pharse_list[j]==text_split[i+j]:
+                    match_times+=1
+                if match_times==pharse_length:
+                    return True
+            match_times=0
+        return False
 # Problem 3
-# TODO: TitleTrigger
+# TitleTrigger
+class TitleTrigger(PharseTrigger):
 
+    def evaluate(self,story):
+        return self.is_pharse_in(story.get_title())
 # Problem 4
-# TODO: DescriptionTrigger
+# DescriptionTrigger
+class DescriptionTrigger(PharseTrigger):
 
+    def evaluate(self,story):
+        return self.is_pharse_in(story.get_description())
 # TIME TRIGGERS
 
 # Problem 5
