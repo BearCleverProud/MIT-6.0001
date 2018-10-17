@@ -214,7 +214,13 @@ def filter_stories(stories, triggerlist):
     # TODO: Problem 10
     # This is a placeholder
     # (we're just returning all the stories, with no filtering)
-    return stories
+    return_list=[]
+    for each_trigger in triggerlist:
+        for each_story in stories:
+            if each_trigger.evaluate(each_story):
+                return_list.append(each_story)
+    return_list=list(set(return_list))
+    return return_list
 
 
 
@@ -241,8 +247,34 @@ def read_trigger_config(filename):
     # TODO: Problem 11
     # line is the list of lines that you need to parse and for which you need
     # to build triggers
+    triggers=[]
+    trigger_dict={}
+    for each_line in lines:
+        line_split=line.split(",")
+        if line_split[0]=="ADD":
+            for i in range(1,len(line_split)):
+                triggers.append(trigger_dict[line_split[i]])
+        else:
+            trigger_name=line_split[0]
+            if line[1]=="TITLE":
+                trigger_dict[trigger_name]=TitleTrigger(line_split[2])
+            elif line[1]=="DESCRIPTION":
+                trigger_dict[trigger_name]=DescriptionTrigger(line_split[2])
+            elif line[1]=="AND":
+                trigger_dict[trigger_name]=AndTrigger(trigger_dict[line_split[2]],trigger_dict[line_split[3]])
+            elif line[1]=="NOT":
+                trigger_dict[trigger_name]=NotTrigger(trigger_dict[line_split[2]])
+            elif line[1]=="OR":
+                trigger_dict[trigger_name]=OrTrigger(trigger_dict[line_split[2]],trigger_dict[line_split[3]])
+            elif line[1]=="AFTER":
+                trigger_dict[trigger_name]=AfterTrigger(line_split[2])
+            elif line[1]=="BEFORE":
+                trigger_dict[trigger_name]=BeforeTrigger(line_split[2])
+            else:
+                pass
 
     print(lines) # for now, print it so you see what it contains!
+    return triggers
 
 
 
@@ -259,8 +291,8 @@ def main_thread(master):
         triggerlist = [t1, t4]
 
         # Problem 11
-        # TODO: After implementing read_trigger_config, uncomment this line
-        # triggerlist = read_trigger_config('triggers.txt')
+        # After implementing read_trigger_config, uncomment this line
+        triggerlist = read_trigger_config('triggers.txt')
 
         # HELPER CODE - you don't need to understand this!
         # Draws the popup window that displays the filtered stories
