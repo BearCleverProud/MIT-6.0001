@@ -141,26 +141,64 @@ class DescriptionTrigger(PharseTrigger):
 # TIME TRIGGERS
 
 # Problem 5
-# TODO: TimeTrigger
+# TimeTrigger
 # Constructor:
 #        Input: Time has to be in EST and in the format of "%d %b %Y %H:%M:%S".
 #        Convert time from string to a datetime before saving it as an attribute.
+class TimeTrigger(Trigger):
+
+    def __init__(self,EST):
+        self.time=datetime.strptime(EST,"%d %b %Y %H:%M:%S")
 
 # Problem 6
-# TODO: BeforeTrigger and AfterTrigger
+# BeforeTrigger and AfterTrigger
+class BeforeTrigger(TimeTrigger):
+
+    def evaluate(self,story):
+        if self.time>story.get_pubdate().replace(tzinfo=None):
+            return True
+        else:
+            return False
+
+class AfterTrigger(TimeTrigger):
+
+    def evaluate(self,story):
+        if self.time<story.get_pubdate().replace(tzinfo=None):
+            return True
+        else:
+            return False
 
 
 # COMPOSITE TRIGGERS
 
 # Problem 7
-# TODO: NotTrigger
+# NotTrigger
+class NotTrigger(Trigger):
+    def __init__(self,another_trigger):
+        self.trigger=another_trigger
+
+    def evaluate(self,story):
+        return not self.trigger.evaluate(story)
 
 # Problem 8
-# TODO: AndTrigger
+# AndTrigger
+class AndTrigger(Trigger):
+    def __init__(self,one_trigger,another_trigger):
+        self.one_trigger=one_trigger
+        self.another_trigger=another_trigger
+
+    def evaluate(self,story):
+        return self.one_trigger.evaluate(story) and self.another_trigger.evaluate(story)
 
 # Problem 9
-# TODO: OrTrigger
+# OrTrigger
+class OrTrigger(Trigger):
+    def __init__(self,one_trigger,another_trigger):
+        self.one_trigger=one_trigger
+        self.another_trigger=another_trigger
 
+    def evaluate(self,story):
+        return self.one_trigger.evaluate(story) or self.another_trigger.evaluate(story)
 
 #======================
 # Filtering
